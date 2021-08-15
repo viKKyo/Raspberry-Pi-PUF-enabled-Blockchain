@@ -1,0 +1,81 @@
+curl --location --request POST '192.168.100.102:5000/nodes/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "nodes": ["192.168.100.102"]
+}'
+
+- mine 2 blocks on #2, 3 blocks on #3, 4 blocks on #4:
+
+
+curl --location --request GET '192.168.100.101:5000/mine' \
+--header 'Content-Type: application/json'
+
+
+curl --location --request GET '192.168.100.102:5000/mine' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.103:5000/mine' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.104:5000/mine' \
+--header 'Content-Type: application/json'
+
+- show full chain on each
+
+curl --location --request GET '192.168.100.101:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.102:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.103:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.104:5000/chain' \
+--header 'Content-Type: application/json'
+
+
+- call consensus:
+
+curl --location --request GET '192.168.100.101:5000/nodes/resolve' \
+--header 'Content-Type: application/json'
+
+- show full chain
+
+curl --location --request GET '192.168.100.101:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.102:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.103:5000/chain' \
+--header 'Content-Type: application/json'
+
+curl --location --request GET '192.168.100.104:5000/chain' \
+--header 'Content-Type: application/json'
+
+- transactions:
+
+curl --location --request POST '192.168.100.102:5000' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "sender": "nodeAddress",
+    "recipient": "nodeAddress",
+    "amount": 5
+}'
+
+curl --location --request POST '192.168.100.103:5000' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "sender": "nodeAddress",
+    "recipient": "nodeAddress",
+    "amount": 5
+}'
+
+curl --location --request POST '192.168.100.104:5000' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "sender": "nodeAddress",
+    "recipient": "nodeAddress",
+    "amount": 5
+}'
